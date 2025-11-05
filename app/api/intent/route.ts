@@ -10,8 +10,9 @@ export async function POST(req: Request){
         const newIntent = await Intent.create({
             nome: body.nome,
             email: body.email,
+            empresa: body.empresa,
             motivo: body.motivo,
-            status: "PENDING",
+            status: "PENDENTE",
         });
 
         return NextResponse.json(

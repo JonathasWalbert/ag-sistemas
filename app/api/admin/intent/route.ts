@@ -6,7 +6,29 @@ export async function GET(){
     try{
         await connectDB();
 
-        const intents = await Intent.find().sort({ createedAt: -1 });
+        const intents = await Intent.aggregate([
+          {
+    $match: {
+      status: { $ne: "CONCLUIDO" }
+    }
+  },
+      {
+        $addFields: {
+          sortOrder: {
+            $switch: {
+              branches: [
+                { case: { $eq: ["$status", "PENDENTE"] }, then: 1 },
+                { case: { $eq: ["$status", "APROVADO"] }, then: 2 },
+                { case: { $eq: ["$status", "REJEITADO"] }, then: 3 },
+              ],
+              default: 4
+            }
+          }
+        }
+      },
+      { $sort: { sortOrder: 1, createdAt: -1 } },
+      { $project: { sortOrder: 0 } }
+    ]);
 
         return NextResponse.json(
             { success: true, data: intents },
