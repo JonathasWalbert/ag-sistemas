@@ -139,24 +139,16 @@ src/
 │
 ├─ lib/
 │  ├─ db.ts                        # Conexão com o MongoDB
-│  ├─ validations.ts               # Schemas Zod globais
 │  ├─ utils.ts                     # Funções auxiliares
-│  └─ constants.ts                 # Constantes e enums globais
 │
 ├─ __tests__/                      # Testes unitários e integração (Vitest)
 │  ├─ success/
 │  │  ├─ intentForm.validation.test.tsx
 │  │  └─ completeIntentForm.validation.test.tsx
-│  ├─ components/
-│  │  └─ intentForm.test.tsx
-│  └─ api/
-│     └─ intent.post.test.ts
+│  ├─ bad/
+│  │  ├─ intentForm.validation.test.tsx
+│  │  └─ completeIntentForm.validation.test.tsx
 │
-├─ tests/                          # Testes E2E (Playwright)
-│  ├─ playwright.config.ts
-│  └─ e2e/
-│     ├─ intentForm.e2e.spec.ts
-│     └─ completeIntentForm.e2e.spec.ts
 │
 ├─ public/
 ├─ .env.local
