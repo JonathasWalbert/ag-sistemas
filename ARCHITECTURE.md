@@ -89,13 +89,12 @@ Regras:
 #### POST `/api/intent`
 Cria intenção pública
 
-#### POST `/api/referrals`
-Registra indicação
+#### POST `/api/user/register`
+Cadastra usuário no banco de dados e encerra a intent com status de Concluído.
 
-#### POST `/api/attendance`
-Check-in em reunião
+#### GET `/api/admin`
+Busca todas as intenções no banco de dados com status que são diferentes de concluídos e as organiza em PENDENTE, APROVADO, REJEITADO.
 
-(Detalhado anteriormente)
 
 ---
 
