@@ -5,20 +5,27 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 
 import { Form, 
-    FormControl, 
-    FormDescription, 
+    FormControl,  
     FormField, 
     FormItem, 
     FormLabel, 
-    FormMessage } from "../ui/form";
+    } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
+import { toast } from "sonner";
+import { useState } from "react";
+import { Spinner } from "../ui/spinner";
+import { BorderBeam } from "../ui/border-beam";
 
 const formSchema = z.object({
     nome: z.string().min(1, {
         message: "Digite seu nome"
     }).max(50),
     email: z.email("Email inválido"),
+    empresa: z.string().min(1, {
+      message: "Digite o nome da sua empresa"
+    }),
     motivo: z.string().min(10, {
         message: "Digite seu motivo com no mínimo 10 caracteres"
     }).max(250),
@@ -26,17 +33,21 @@ const formSchema = z.object({
 
 
 export default function IntentForm(){
+  const [loading, setLoading] = useState(false);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues:{
             nome: "",
             email: "",
+            empresa: "",
             motivo: "",
         }
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>){
         try{
+          setLoading(true);
           const res = await fetch("/api/intent", {
             method: "POST",
             headers: {
@@ -46,17 +57,19 @@ export default function IntentForm(){
           });
 
           await res.json();
-          alert("Intenção enviada com sucesso!");
+          setLoading(false);
+          toast.success("Intenção enviada com sucesso!");
           form.reset();
 
         }catch(err){
-          console.error(err);
-          alert("Erro ao enviar intenção.");
+          setLoading(false);
+          console.log(err);
+          toast.error("Erro ao enviar intenção.");
         }
     }
     
     return(
-    <div className="max-w-5xl mx-auto my-8 border-2 rounded-sm p-4">
+    <div className="my-5 border-2 rounded-sm p-4 border-black/25 relative overflow-hidden">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
@@ -66,7 +79,7 @@ export default function IntentForm(){
             <FormItem>
               <FormLabel>Nome</FormLabel>
               <FormControl>
-                <Input placeholder="Nome" {...field} className="" />
+                <Input placeholder="Nome" {...field} className="border-black bg-white/25 font-medium"  />
               </FormControl>
             </FormItem>
           )}
@@ -79,7 +92,20 @@ export default function IntentForm(){
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="email@gmail.com" {...field} />
+                <Input placeholder="email@gmail.com" {...field} className="border-black bg-white/25 font-medium"/>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="empresa"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Empresa</FormLabel>
+              <FormControl>
+                <Input placeholder="Nome da empresa" {...field} className="border-black bg-white/25 font-medium"/>
               </FormControl>
             </FormItem>
           )}
@@ -92,13 +118,26 @@ export default function IntentForm(){
             <FormItem>
               <FormLabel>Motivo</FormLabel>
               <FormControl>
-                <Input placeholder="Por que você quer participar ?" {...field} />
+                <Textarea placeholder="Por que você quer participar ?" {...field} className="border-black bg-white/25 font-medium h-36"/>
               </FormControl>
             </FormItem>
           )}
         />
-        <Button type="submit" size="lg">Enviar</Button>
+        <div className="flex justify-center">
+          {loading ? (
+            <Button type="submit" size="lg" disabled className="w-full lg:w-1/2"><Spinner/> Enviando</Button>
+            ):(
+            <Button type="submit" size="lg" className="w-full lg:w-1/2">Enviar</Button>
+            )}
+          
+        </div>
       </form>
+      <BorderBeam
+        duration={4}
+        size={300}
+        reverse
+        className="from-transparent via-black to-transparent"
+      />
     </Form>
     </div>
     );
