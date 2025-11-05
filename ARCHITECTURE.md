@@ -58,7 +58,7 @@ flowchart LR
 | `gratitudes` | Obrigados / agradecimentos |
 | `payments` | Mensalidades |
 
-(Conteúdo completo fornecido anteriormente)
+A escolha do banco de dados MongoDB se dá pela sua estrutura NoSQL que registra as informações através de coleções e suas principais características são a flexilidade, escabalabilidade e perfomance. Diferente de se utilizar um SQLite, por exemplo, que são banco de dados voltados para pequenas aplicabilidade e visando escalabilidade e expansão de projeto, futuramente poderia não nos atender.
 
 ---
 
