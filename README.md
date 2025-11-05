@@ -1,82 +1,183 @@
-Desafio técnico - AG Sistemas - Full Stack
+# 🚀 Desafio Técnico — AG Sistemas (Full Stack)
 
-Sistema desenvolvido por Jonathas Walbert — aplicação web voltada para registro de intenções e posteriormente cadastro de usuários.
+**Sistema desenvolvido por:** [Jonathas Walbert](https://github.com/JonathasWalbert)
 
-Tecnologias utilizadas
+Aplicação web voltada para **registro de intenções** e posterior **cadastro de membros**, simulando um fluxo real de aprovação e onboarding.
 
-Front-end: Next.js
-Linguagem: TypeScript
-Estilização: TailwindCSS, Shadcn, Magic UI
-Back-end: Next.js
-Banco de dados: MongoDB
-Autenticação: Ficticia controlado com variável de ambiente.
+---
 
-Pré-requisitos
+## 🧠 Tecnologias Utilizadas
 
-Antes de iniciar, verifique se você possui instalado:
-Node.js
-npm
-Git
+| Camada | Tecnologias |
+|--------|--------------|
+| **Front-end** | Next.js (App Router), TypeScript |
+| **Estilização** | Tailwind CSS, Shadcn/UI, Magic UI |
+| **Back-end** | Next.js (API Routes) |
+| **Banco de Dados** | MongoDB (Mongoose) |
+| **Autenticação** | Simulada por variável de ambiente (`NEXT_PUBLIC_USER_ADMIN`) |
 
+---
 
-## Getting Started
+## ⚙️ Pré-requisitos
 
+Antes de iniciar, verifique se você possui instalado em sua máquina:
 
-Setup do projeto
+- [Node.js](https://nodejs.org/)
+- npm ou yarn
+- [Git](https://git-scm.com/)
 
-```
-1. Clone do repositório
+---
+
+## 🧩 Setup do Projeto
+
+### 1️⃣ Clonar o repositório
+
+```bash
 git clone https://github.com/JonathasWalbert/ag-sistemas.git
 cd ag-sistemas
 ```
 
-2. Instalação das dependências
-```
-# se for npm
+### 2️⃣ Instalar as dependências
+
+```bash
+# usando npm
 npm install
+# ou yarn
+yarn install
 ```
 
-# Arquivo: .env.local
+### 3️⃣ Configurar variáveis de ambiente
 
-# BACK-END
+Crie o arquivo `.env.local` na raiz do projeto:
+
+```bash
+# MongoDB
 MONGODB_URI="mongodb+srv://<usuario>:<senha>@cluster.vfir66v.mongodb.net/?appName=<DATABASE_NAME>"
 
-# ou outras variáveis conforme necessário
-NEXT_PUBLIC_USER_ADMIN="admin" || Variável que simboliza usuario admin, caso esteja vazia, a rota de ADMIN irá redirecionar para tela inicial. Só terá acesso, caso tenha alguma informação nessa variável.
+# Simulação de autenticação ADMIN
+NEXT_PUBLIC_USER_ADMIN="admin"
+```
 
+> ⚠️ Caso a variável `NEXT_PUBLIC_USER_ADMIN` esteja vazia, as rotas de administração serão automaticamente redirecionadas para a tela inicial.
 
-4. Executando a aplicação em modo de desenvolvimento
+---
+
+## ▶️ Executando a aplicação
+
+```bash
 npm run dev
-
-
-
-Abra no navegador: http://localhost:3000 e a aplicação estará rodando localmente.
-
-
-Estrutura de pastas
 ```
-/
-├─ __tests__/           # código de testes    
-├─ app/                 # código principal da aplicação
-├─ components/          # componentes React reutilizáveis e Shadcn
-├─ lib/                 # bibliotecas/utilitários/Banco de dados
-├─ public/              # assets públicos
-├─ .env.local           # variáveis de ambiente (local)
+
+Acesse: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📁 Estrutura de Pastas (Atualizada)
+
+```
+src/
+├─ app/
+│  ├─ (public)/
+│  │  ├─ page.tsx                  # Página pública de intenção
+│  │  └─ cadastro-final/
+│  │     └─ page.tsx               # Página de cadastro completo via token
+│  │
+│  ├─ cadastrado/
+│  │  └─ page.tsx                  # Tela de sucesso pós-cadastro
+│  │
+│  ├─ admin/
+│  │  ├─ page.tsx                  # Painel principal do admin
+│  │  ├─ components/
+│  │  │  └─ CardIntent.tsx         # Card de intenções
+│  │  └─ intents/
+│  │     ├─ page.tsx               # Lista de intenções
+│  │     ├─ [id]/
+│  │     │  ├─ approved/
+│  │     │  │  └─ route.ts         # POST → Aprovar intenção
+│  │     │  └─ completed/
+│  │     │     └─ route.ts         # PUT → Marcar como concluída
+│  │     └─ route.ts               # GET → Listar intenções (admin)
+│  │
+│  ├─ api/
+│  │  ├─ intent/
+│  │  │  ├─ route.ts               # POST → Registrar intenção pública
+│  │  │  └─ validate/
+│  │  │     └─ route.ts            # GET → Validar token de convite
+│  │  ├─ user/
+│  │  │  └─ register/
+│  │  │     └─ route.ts            # POST → Cadastrar usuário final
+│  │  └─ admin/
+│  │     └─ intent/
+│  │        ├─ route.ts            # GET → Listar intenções admin
+│  │        └─ [id]/
+│  │           ├─ approved/
+│  │           │  └─ route.ts
+│  │           └─ completed/
+│  │              └─ route.ts
+│  │
+│  ├─ layout.tsx                   # Layout global
+│  ├─ globals.css                  # Estilos globais
+│  └─ page.tsx                     # Página inicial
+│
+├─ components/
+│  ├─ common/
+│  │  ├─ IntentForm.tsx            # Formulário de intenção
+│  │  └─ CompleteIntentForm.tsx    # Formulário completo pós-aprovação
+│  ├─ ui/                          # Componentes visuais do Shadcn e Magic UI
+│  │  ├─ form.tsx
+│  │  ├─ input.tsx
+│  │  ├─ button.tsx
+│  │  ├─ textarea.tsx
+│  │  ├─ spinner.tsx
+│  │  └─ border-beam.tsx
+│
+├─ modules/                        # Camada de domínio
+│  ├─ intent/
+│  │  └─ intent.model.ts           # Schema e operações Mongoose
+│  └─ user/
+│     └─ user.model.ts
+│
+├─ lib/
+│  ├─ db.ts                        # Conexão com o MongoDB
+│  ├─ validations.ts               # Schemas Zod globais
+│  ├─ utils.ts                     # Funções auxiliares
+│  └─ constants.ts                 # Constantes e enums globais
+│
+├─ __tests__/                      # Testes unitários e integração (Vitest)
+│  ├─ success/
+│  │  ├─ intentForm.validation.test.tsx
+│  │  └─ completeIntentForm.validation.test.tsx
+│  ├─ components/
+│  │  └─ intentForm.test.tsx
+│  └─ api/
+│     └─ intent.post.test.ts
+│
+├─ tests/                          # Testes E2E (Playwright)
+│  ├─ playwright.config.ts
+│  └─ e2e/
+│     ├─ intentForm.e2e.spec.ts
+│     └─ completeIntentForm.e2e.spec.ts
+│
+├─ public/
+├─ .env.local
 ├─ package.json
-├─ tsconfig.json
-└─ README.md
+└─ tsconfig.json
 ```
 
-## Funcionalidades principais
+---
 
-```
--> Página inicial pública que irá registrar a intenção do usuário
+## 🧪 Testes
 
--> Página do administrador que está protegida por uma variável de ambiente simulando um sistema de login, nesta página o usuário consegue visualizar as intenções registrada e consegue aprovar ou rejeitar intenção.
+O projeto inclui testes de:
 
--> Após aceitar a intenção, o usuário recebe via console.log uma simulação de envio de email contendo um link para cadastro completo da aplicação, a página acessada terá um token e só poderá acessar com esse token.
+- **Componentes**: React Testing Library  
+- **Integração**: Vitest  
 
--> Ao acessar o link de cadastro completo, o usuário tem um formulário mais completo para preenchimento das informações pessoais e ao finalizar o cadastro, o usuário é registrado no banco de dados na tabela de USERS e sua intenção é atualizada com status de CONCLUIDO, então, é registrado para uma página de cadastro com a mensagem de cadastro completo.
+> Os testes validam fluxo de envio, validações Zod e sucesso de submissão.
 
--> Front-end em React (Next.js) estilizado com Tailwind CSS, Shadcn e Magic UI.
-```
+---
+
+## 📄 Licença
+
+Projeto desenvolvido para fins **de avaliação técnica**.  
+Autor: **Jonathas Walbert**
