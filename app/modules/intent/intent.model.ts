@@ -7,12 +7,13 @@ const IntentSchema = new mongoose.Schema({
     motivo: String,
     status: {
         type: String,
-        enum: ["PENDING", "APPROVED", "REJECT"],
-        default: "PENDING"
+        enum: ["PENDENTE", "APROVADO", "REJEITADO", "COMPLETO"],
+        default: "PENDENTE"
     },
     approvalToken: String,
+    approvedAt: Date,
 },
-    {timestamps: true}
+    { timestamps: true }
 );
 
 export const Intent = mongoose.models.Intent || mongoose.model("Intent", IntentSchema);
