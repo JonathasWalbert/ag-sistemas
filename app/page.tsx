@@ -6,7 +6,7 @@ export default function Home() {
     <div className="min-h-screen bg-black/25">
       <div className="px-4 lg:max-w-5xl lg:mx-auto">
         <h1 className="pt-12 font-bold lg:text-2xl">Página de intenção</h1>
-        <IntentForm />
+          <IntentForm />
 
       </div>
     </div>
