@@ -8,7 +8,8 @@ import { Form,
     FormControl,  
     FormField, 
     FormItem, 
-    FormLabel, 
+    FormLabel,
+    FormMessage, 
     } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -22,8 +23,8 @@ const formSchema = z.object({
     nome: z.string().min(1, "Digite seu nome").max(50),
     email: z.email("Email inválido"),
     empresa: z.string().min(1, "Digite o nome da sua empresa"),
-    telefone: z.string().min(11,"11984051486"),
-    idade: z.coerce.number().int().min(1),
+    telefone: z.string().min(11,"Digite um telefone válido (11 dígitos)"),
+    idade: z.coerce.number().int().min(1, "Digite sua idade"),
     cidade: z.string().min(1,"Digite sua cidade"),
     estado: z.string().min(1,"Digite seu estado")
 });
@@ -98,7 +99,7 @@ export default function CompleteIntentForm({data}){
     }
     
     return(
-    <div className="my-8 border-2 border-black/25 rounded-sm p-4 relative">
+    <div className="my-8 border-1 border-black/25 rounded-sm p-4 relative">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
@@ -110,6 +111,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="Nome" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -123,6 +125,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="email@gmail.com" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -136,6 +139,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="Nome da empresa" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -149,6 +153,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="11984051486" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -162,6 +167,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input type="number" placeholder="18" {...field} className="border-black bg-white/25 font-medium"/>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -175,6 +181,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="São Paulo" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -188,6 +195,7 @@ export default function CompleteIntentForm({data}){
               <FormControl>
                 <Input placeholder="Bahia" {...field} className="border-black bg-white/25 font-medium" />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

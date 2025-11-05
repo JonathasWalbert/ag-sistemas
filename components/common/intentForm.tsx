@@ -8,7 +8,8 @@ import { Form,
     FormControl,  
     FormField, 
     FormItem, 
-    FormLabel, 
+    FormLabel,
+    FormMessage, 
     } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -69,7 +70,7 @@ export default function IntentForm(){
     }
     
     return(
-    <div className="my-5 border-2 rounded-sm p-4 border-black/25 relative overflow-hidden">
+    <div className="my-5 border-1 rounded-sm p-4 border-black/25 relative overflow-hidden">
         <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
@@ -81,6 +82,7 @@ export default function IntentForm(){
               <FormControl>
                 <Input placeholder="Nome" {...field} className="border-black bg-white/25 font-medium"  />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -94,6 +96,7 @@ export default function IntentForm(){
               <FormControl>
                 <Input placeholder="email@gmail.com" {...field} className="border-black bg-white/25 font-medium"/>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -107,6 +110,7 @@ export default function IntentForm(){
               <FormControl>
                 <Input placeholder="Nome da empresa" {...field} className="border-black bg-white/25 font-medium"/>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -120,6 +124,7 @@ export default function IntentForm(){
               <FormControl>
                 <Textarea placeholder="Por que você quer participar ?" {...field} className="border-black bg-white/25 font-medium h-36"/>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
