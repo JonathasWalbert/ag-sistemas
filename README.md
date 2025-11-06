@@ -4,6 +4,8 @@
 
 Aplicação web voltada para **registro de intenções** e posterior **cadastro de membros**, simulando um fluxo real de aprovação e onboarding.
 
+Como parte do desafio, foi implementado um **sistema de indicações** onde, o usuário (logado) cria uma indicação de negócio e além disso, o mesmo poderá gerenciar apenas as indicações que ele mesmo criou.
+
 ---
 
 ## 🧠 Tecnologias Utilizadas
@@ -77,65 +79,103 @@ Acesse: [http://localhost:3000](http://localhost:3000)
 ```
 src/
 ├─ app/
-│  ├─ (public)/
-│  │  ├─ page.tsx                  # Página pública de intenção
-│  │  └─ cadastro-final/
-│  │     └─ page.tsx               # Página de cadastro completo via token
+│  ├─ layout.tsx                   # Layout global
+│  ├─ globals.css                  # Estilos globais
+│  ├─ page.tsx                     # Página pública de intenção
+│  ├─ components/                  # Componentes da página pública
+│  │   ├─ button.tsx                  
+│  │   └─ intentForm.tsx  
+│  │
+│  │    
+│  ├─ admin/
+│  │  ├─ page.tsx                  # Página principal do admin
+│  │  └─ components/               # Componentes da página de admin
+│  │     └─ CardIntent.tsx         
+│  │
+│  │
+│  ├─ area-membro/
+│  │  ├─ page.tsx                  # Página principal da área membro
+│  │  ├─ components/               # Componentes da página da área de membro   
+│  │  │  ├─ buttonLogout.tsx               
+│  │  │  ├─ buttonMyIndications.tsx               
+│  │  │  └─ indicationForm.tsx               
+│  │  └─ minhas-indicacoes/        # Rota dentro da area membro para verificar as próprias indicações         
+│  │      ├─ components/           # Componentes da página de minhas indicações            
+│  │      │    ├─ buttonBack.tsx               
+│  │      │    └─ cardReferral.tsx  
+│  │      └─ page.tsx              # Página dentro da rota da area membro para verificar as próprias indicações
+│  │  
 │  │
 │  ├─ cadastrado/
 │  │  └─ page.tsx                  # Tela de sucesso pós-cadastro
 │  │
-│  ├─ admin/
-│  │  ├─ page.tsx                  # Painel principal do admin
-│  │  ├─ components/
-│  │  │  └─ CardIntent.tsx         # Card de intenções
-│  │  └─ intents/
-│  │     ├─ page.tsx               # Lista de intenções
-│  │     ├─ [id]/
-│  │     │  ├─ approved/
-│  │     │  │  └─ route.ts         # POST → Aprovar intenção
-│  │     │  └─ completed/
-│  │     │     └─ route.ts         # PUT → Marcar como concluída
-│  │     └─ route.ts               # GET → Listar intenções (admin)
+│  ├─ cadastro-final/
+│  │  ├─ page.tsx                  # Página Cadastro final
+│  │  └─ components/               # Componentes da página de cadastro final
+│  │     └─ completeIntentForm.tsx       
 │  │
-│  ├─ api/
-│  │  ├─ intent/
-│  │  │  ├─ route.ts               # POST → Registrar intenção pública
-│  │  │  └─ validate/
-│  │  │     └─ route.ts            # GET → Validar token de convite
-│  │  ├─ user/
-│  │  │  └─ register/
-│  │  │     └─ route.ts            # POST → Cadastrar usuário final
-│  │  └─ admin/
-│  │     └─ intent/
-│  │        ├─ route.ts            # GET → Listar intenções admin
-│  │        └─ [id]/
-│  │           ├─ approved/
-│  │           │  └─ route.ts
-│  │           └─ completed/
-│  │              └─ route.ts
 │  │
-│  ├─ layout.tsx                   # Layout global
-│  ├─ globals.css                  # Estilos globais
-│  └─ page.tsx                     # Página inicial
+│  ├─ login/
+│  │  ├─ page.tsx                  # Página de login
+│  │  └─ components/               # Componentes da página de login
+│  │     └─ loginForm.tsx   
+│  │
+│  │
+│  │
+│  │
+│  │
+│  └─ api/
+│     ├─ intent/
+│     │  ├─ route.ts               # POST → Registrar intenção pública
+│     │  └─ validate/
+│     │     └─ route.ts            # GET → Validar token de convite
+│     ├─ user/
+│     │  ├─ register/
+│     │  │   └─ route.ts            # POST → Cadastrar membro
+│     │  ├─ login/
+│     │  │   └─ route.ts            # POST → Realizar login membro
+│     │  └─ logout/
+│     │     └─ route.ts            # POST → Realizar logout membro
+│     ├─ admin/
+│     │   └─ intent/
+│     │     ├─ route.ts            # GET → Listar intenções admin
+│     │     └─ [id]/
+│     │         ├─ approved/
+│     │         │  └─ route.ts     # POST → Aprovar intenção
+│     │         └─ completed/
+│     │            └─ route.ts     # PUT → Atulizar status da intenção para Completo
+│     └─ referrals/
+│        ├─ route.ts               # POST → Registrar indicação de negócio
+│        ├─ [id]/
+│        │  └─ route.ts            # GET → Listar indicações dos membros   
+│        └─ status/
+│           └─ route.ts            # PUT → Atulizar status das indicações 
+│  
+│      
+│  
 │
 ├─ components/
-│  ├─ common/
-│  │  ├─ IntentForm.tsx            # Formulário de intenção
-│  │  └─ CompleteIntentForm.tsx    # Formulário completo pós-aprovação
 │  ├─ ui/                          # Componentes visuais do Shadcn e Magic UI
-│  │  ├─ form.tsx
-│  │  ├─ input.tsx
-│  │  ├─ button.tsx
-│  │  ├─ textarea.tsx
-│  │  ├─ spinner.tsx
 │  │  └─ border-beam.tsx
+│  │  ├─ button.tsx
+│  │  └─ confetti.tsx
+│  │  ├─ form.tsx
+│  │  └─ globe.tsx
+│  │  ├─ input.tsx
+│  │  └─ label.tsx
+│  │  └─ select.tsx
+│  │  └─ skeleton.tsx
+│  │  └─ sonner.tsx
+│  │  ├─ spinner.tsx
+│  │  ├─ textarea.tsx
 │
 ├─ modules/                        # Camada de domínio
 │  ├─ intent/
 │  │  └─ intent.model.ts           # Schema e operações Mongoose
 │  └─ user/
 │     └─ user.model.ts
+│  └─ referral/
+│     └─ referral.model.ts
 │
 ├─ lib/
 │  ├─ db.ts                        # Conexão com o MongoDB
