@@ -27,9 +27,7 @@ Tecnologias:
 
 ## 1) Diagrama da Arquitetura
 
-```
-(./public/arquitetura.png)
-```
+![Diagrama da Arquitetura](./public/arquitetura.png)
 
 ---
 
