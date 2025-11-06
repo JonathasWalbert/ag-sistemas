@@ -1,9 +1,9 @@
 "use client"
 
-import CompleteIntentForm from "@/components/common/completeIntentForm";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import CompleteIntentForm from "./components/completeIntentForm";
 
 export default function CadastroFinal() {
     const token = useSearchParams().get("token");

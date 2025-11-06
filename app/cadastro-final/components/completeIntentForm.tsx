@@ -10,13 +10,13 @@ import { Form,
     FormItem, 
     FormLabel,
     FormMessage, 
-    } from "../ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+    } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { BorderBeam } from "../ui/border-beam";
-import { Spinner } from "../ui/spinner";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
 
 const formSchema = z.object({
@@ -77,7 +77,9 @@ export default function CompleteIntentForm({data}){
           });
 
           await res.json();
-          toast.success("Usuário cadastrado com sucesso!");
+          toast.success("Usuário cadastrado com sucesso!",{
+            position: "top-center"
+          });
           form.reset();
           
           await fetch(`/api/admin/intent/${data.id}/completed`, {
@@ -94,7 +96,9 @@ export default function CompleteIntentForm({data}){
         }catch(err){
           console.error(err);
           setLoading(false);
-          toast.error("Erro ao cadastrar usuário");
+          toast.error("Erro ao cadastrar usuário",{
+            position: "top-center"
+          });
         }
     }
     

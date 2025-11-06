@@ -9,7 +9,7 @@ export default function Cadastrado() {
 
   return (
     <div className="bg-background bg-black/25 relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden rounded-lg border">
-      <span className="pointer-events-none bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-8xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-white dark:to-slate-900/10 ">
+      <span className="pointer-events-none bg-gradient-to-b from-black to-gray-300/80 bg-clip-text text-center text-4xl lg:text-8xl leading-none font-semibold whitespace-pre-wrap text-transparent dark:from-white dark:to-slate-900/10 ">
         Cadastro realizado !
       </span>
 

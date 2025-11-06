@@ -10,14 +10,14 @@ import { Form,
     FormItem, 
     FormLabel,
     FormMessage, 
-    } from "../ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
+    } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Spinner } from "../ui/spinner";
-import { BorderBeam } from "../ui/border-beam";
+import { Spinner } from "@/components/ui/spinner";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const formSchema = z.object({
     nome: z.string().min(1, {
@@ -59,13 +59,17 @@ export default function IntentForm(){
 
           await res.json();
           setLoading(false);
-          toast.success("Intenção enviada com sucesso!");
+          toast.success("Intenção enviada com sucesso!", {
+            position: "top-center"
+          });
           form.reset();
 
         }catch(err){
           setLoading(false);
           console.log(err);
-          toast.error("Erro ao enviar intenção.");
+          toast.error("Erro ao enviar intenção.", {
+            position: "top-center"
+          });
         }
     }
     

@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CardIntent from "./components/cardIntent";
-import { div } from "motion/react-client";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Admin() {

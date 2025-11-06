@@ -19,14 +19,18 @@ export default function CardIntent({data, refreshList}) {
             const result = await res.json();
             if(result) {
               refreshList();
-              toast.success("Status Atualizado!")
+              toast.success("Status Atualizado!", {
+                position: "top-center"
+              })
             }
 
             setLoading(false);
 
         }catch(err){
             console.error(err);
-            toast.success("Não foi possível atualizar - " + err)
+            toast.success("Não foi possível atualizar - " + err, {
+                position: "top-center"
+              })
             setLoading(false);
         }
       }else{
@@ -41,19 +45,25 @@ export default function CardIntent({data, refreshList}) {
             const result = await res.json();
             if(result) {
               refreshList();
-              toast.success("Status Atualizado!")
+              toast.success("Status Atualizado!", {
+                position: "top-center"
+              })
             }
 
             setLoading(false);
 
         }catch(err){
             console.error(err);
-            toast.error("Não foi possível atualizar - " + err)
+            toast.error("Não foi possível atualizar - " + err, {
+                position: "top-center"
+              })
             setLoading(false);
         }
       }
         
     }
+
+
  return (
    <div className="lg:flex lg:justify-between">
         <div className="flex flex-col space-y-1">
