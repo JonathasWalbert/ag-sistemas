@@ -27,17 +27,8 @@ Tecnologias:
 
 ## 1) Diagrama da Arquitetura
 
-```mermaid
-flowchart LR
-  U[Usuário (Browser)] --> |HTTP/HTTPS| FE[Next.js]
-
-  subgraph Next.js App
-    FE --> API[(API Routes)]
-  end
-
-  API --> DB[(MongoDB Atlas)]
-  FE --> AUTH[NextAuth]
-  AUTH --> DB
+```
+(./public/arquitetura.png)
 ```
 
 ---
@@ -77,7 +68,7 @@ tests/
 Regras:
 - Formulários → `react-hook-form` + `zod`
 - Server Components para listagens
-- Zustand opcional para estados globais
+- Redux ou Context opcional para estados globais
 
 ---
 
