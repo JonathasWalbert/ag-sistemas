@@ -1,4 +1,4 @@
-import { Referral } from "@/app/modules/referral/referral.model";
+import { Referral } from "@/app/models/referral/referral.model";
 import { connectDB } from "@/lib/db";
 import { NextResponse } from "next/server";
 

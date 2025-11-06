@@ -1,4 +1,4 @@
-import { Intent } from "@/app/modules/intent/intent.model";
+import { Intent } from "@/app/models/intent/intent.model";
 import { connectDB } from "@/lib/db";
 import { NextResponse } from "next/server";
 

@@ -65,14 +65,13 @@ A escolha do banco de dados MongoDB se dá pela sua estrutura NoSQL que registra
 ## 3) Estrutura de Componentes (Next.js)
 
 ```bash
-src/
-  app/
+
+app/
   components/
-    common/
     ui/
   lib/
   models/
-  tests/
+tests/
 ```
 
 Regras:
